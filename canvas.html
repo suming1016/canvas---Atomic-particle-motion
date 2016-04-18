@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>canvas动画</title>
+    <style>
+        body{
+            background-color:#000000;
+        }
+        canvas{
+            display: block;
+            position: absolute;
+            top:0;
+            left:0;
+            -webkit-box-shadow: inset 0 0 100px #69f;
+            -moz-box-shadow: inset 0 0 100px #69f;
+            box-shadow: inset 0 0 100px #69f; ;
+        }
+    </style>
+</head>
+<body>
+<canvas id="canvas"></canvas>
+<script type="text/javascript">
+    var canvas=document.getElementById("canvas");
+        cxt=canvas.getContext("2d");
+        w = 500;
+        h = 500;
+        partical = 100;//原子数量
+        particals = [];
+        colors = ["#FFFF00","#FFBBFF","#346945","#FF7F00","#FF3030","#EEEE00","#98FB98","#7EC0EE","#7D26CD","#458B74"];
+        canvas.width = w;
+        canvas.height = h;
+        aW = window.innerWidth;
+        aH = window.innerHeight;
+    canvas.style.left = (aW-w)/2+"px";
+    canvas.style.top = (aH-h)/2+"px";
+    function fc(){
+        this.x = Math.round(Math.random()*w);//x
+        this.y = Math.round(Math.random()*h);//y
+        this.rad = Math.round(Math.random()*5)+5;//rad
+        this.rgba = colors[Math.round(Math.random()*10)];
+    }
+    function draw(){
+        for(var i=0;i<partical;i++){
+            var p = particals[i];
+            cxt.beginPath();
+            cxt.fillStyle= p.rgba;
+            cxt.arc(p.x, p.y, p.rad,0,Math.PI*2,true);
+            cxt.fill();
+            cxt.closePath();
+
+            cxt.beginPath();
+            cxt.strokeStyle= p.rgba;
+            cxt.arc(p.x, p.y, p.rad+20,0,Math.PI*2,true);
+            cxt.stroke();
+            cxt.closePath();
+
+        }
+    }
+    (function int(){
+        for(var i=0;i<partical;i++){
+            particals.push(new fc)
+        }
+    })();
+draw();
+
+
+
+
+
+    //var w=500;
+    //var h=500;
+    //
+
+
+
+</script>
+</body>
+</html>
